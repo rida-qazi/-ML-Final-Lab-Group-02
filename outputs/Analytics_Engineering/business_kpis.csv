@@ -1,0 +1,13 @@
+metric,value,unit
+Total Predictions,288.0,records
+Emotion Accuracy,0.6145833333333334,ratio
+Business Group Accuracy,0.7326388888888888,ratio
+Average Prediction Confidence,0.5592844114686812,ratio
+Average Inference Time (ms),0.5388871528945552,ms
+Total Business Cost,795.0,cost units
+Average Business Cost,2.7604166666666665,cost units/record
+False Positive Count,38.0,records
+False Negative Count,23.0,records
+False Positive Cost,114.0,cost units
+False Negative Cost,230.0,cost units
+Total Threshold Cost,344.0,cost units

@@ -1,0 +1,2 @@
+total_predictions,emotion_accuracy,business_group_accuracy,average_prediction_confidence,average_inference_time_ms,total_business_cost,average_business_cost,default_threshold,false_positive_count,false_negative_count,false_positive_cost,false_negative_cost,total_threshold_cost
+288,0.6145833333333334,0.7326388888888888,0.5592844114686812,0.5388871528945552,795,2.7604166666666665,0.5,38,23,114,230,344

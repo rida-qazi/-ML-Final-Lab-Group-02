@@ -83,10 +83,15 @@ EMOTIONS = [
 #
 # requires going up two directories.
 
+import os
+
+# ============================================================
+# PROJECT PATHS
+# ============================================================
+
 PROJECT_ROOT = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__),
-        "..",
         ".."
     )
 )
@@ -117,7 +122,6 @@ os.makedirs(
     OUTPUT_DIR,
     exist_ok=True
 )
-
 
 # In[47]:
 
