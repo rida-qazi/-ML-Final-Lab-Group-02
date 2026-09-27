@@ -1,0 +1,26 @@
+DATA QUALITY LOG & AUDIT SHEET
+=============================================
+Source path          : C:\Users\kamal\Downloads\ml\data\Audio_Speech_Actors_01-24_16k
+Extraction time      : 63.2s
+Total usable files   : 1440
+Corrupt/skipped      : 0
+Feature dimensions   : 180 (40 MFCC + 12 Chroma + 128 Mel)
+Missing feature values : 0
+Infinite feature values: 0
+Duplicate rows          : 0
+Duplicate file paths    : 0
+Unique actors           : 24
+
+Emotion distribution:
+  angry           192
+  calm            192
+  disgust         192
+  fearful         192
+  happy           192
+  neutral         96
+  sad             192
+  surprised       192
+
+Preprocessing validation:
+  File count check    : PASSED (got 1440)
+  STATUS: PASSED
