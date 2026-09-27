@@ -12,7 +12,7 @@ results = []
 warnings.filterwarnings("ignore")
 
 # Processed feature dataset
-FEATURES_PATH = r"rida-qazi/-ML-Final-Lab-Group-02/data/processed/features.csv"
+FEATURES_PATH = r"C:/Users/Hadel/OneDrive/Desktop/ML_Project/-ML-Final-Lab-Group-02/data/processed/features.csv"
 
 # Load features
 df = pd.read_csv(FEATURES_PATH)
@@ -1420,7 +1420,7 @@ plt.show()
 
 import joblib
 
-MODEL_PATH = r"rida-qazi/-ML-Final-Lab-Group-02/models/final_svm_model.pkl"
+MODEL_PATH = r"C:/Users/Hadel/OneDrive/Desktop/ML_Project/-ML-Final-Lab-Group-02/models/final_svm_model.pkl"
 
 joblib.dump(
     final_model,
@@ -1443,3 +1443,5 @@ test_predictions = loaded_model.predict(X_test)
 print("Model loaded successfully.")
 print("Predictions match:",
       (test_predictions == y_test_final).all())
+
+
