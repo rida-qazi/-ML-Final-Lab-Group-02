@@ -12,7 +12,7 @@ results = []
 warnings.filterwarnings("ignore")
 
 # Processed feature dataset
-FEATURES_PATH = r"/Users/macbook/DS/-ML-Final-Lab-Group-02/data/processed/features.csv"
+FEATURES_PATH = r"rida-qazi/-ML-Final-Lab-Group-02/data/processed/features.csv"
 
 # Load features
 df = pd.read_csv(FEATURES_PATH)
@@ -65,7 +65,9 @@ svm_pipeline = Pipeline([
     ("model", SVC(
         kernel="rbf",
         C=10,
-        gamma="scale"
+        gamma="scale",
+        probability=True
+        
     ))
 ])
 
@@ -937,7 +939,7 @@ from sklearn.model_selection import GridSearchCV, StratifiedKFold
 
 svm_pipeline = Pipeline([
     ("scaler", StandardScaler()),
-    ("model", SVC())
+    ("model", SVC(probability=True))
 ])
 
 # --------------------------------------------------
@@ -1418,7 +1420,7 @@ plt.show()
 
 import joblib
 
-MODEL_PATH = r"D:\SJU\ML assn\CallConnect\final_svm_model.pkl"
+MODEL_PATH = r"rida-qazi/-ML-Final-Lab-Group-02/models/final_svm_model.pkl"
 
 joblib.dump(
     final_model,
