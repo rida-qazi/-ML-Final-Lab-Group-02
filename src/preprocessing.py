@@ -638,17 +638,17 @@ def run_preprocessing(
 # ============================================================
 # TEST ONE AUDIO FILE
 # ============================================================
-
-ravdess_files = find_audio_files(DATA_PATH)
-sample_file = ravdess_files[0]
-
-sample_features = extract_features(sample_file)
-validate_features(sample_features)
-
-print("Sample file:", sample_file)
-print("Number of features:", len(sample_features))
-print("Contains NaN:", np.isnan(sample_features).any())
-print("Contains infinite:", np.isinf(sample_features).any())
+if __name__ == "__main__":
+    ravdess_files = find_audio_files(DATA_PATH)
+    sample_file = ravdess_files[0]
+    
+    sample_features = extract_features(sample_file)
+    validate_features(sample_features)
+    
+    print("Sample file:", sample_file)
+    print("Number of features:", len(sample_features))
+    print("Contains NaN:", np.isnan(sample_features).any())
+    print("Contains infinite:", np.isinf(sample_features).any())
 
 
 # %% [markdown]
@@ -711,12 +711,12 @@ print("run_preprocessing()         : READY")
 # ============================================================
 # RUN COMPLETE PREPROCESSING
 # ============================================================
-
-features_df, train_df, test_df, corrupt_files = run_preprocessing(
-    input_path=DATA_PATH,
-    output_path=OUTPUT_PATH,
-    expected_files=1440
-)
+if __name__ == "__main__":
+    features_df, train_df, test_df, corrupt_files = run_preprocessing(
+        input_path=DATA_PATH,
+        output_path=OUTPUT_PATH,
+        expected_files=1440
+    )
 
 
 # %% [markdown]
@@ -729,10 +729,11 @@ features_df, train_df, test_df, corrupt_files = run_preprocessing(
 
 print("\n================ FINAL SUMMARY ================")
 print("Pipeline completed successfully.")
-print(f"Processed files : {len(features_df)}")
-print(f"Corrupt files   : {len(corrupt_files)}")
-print(f"Features/file   : {TOTAL_FEATURES}")
-print(f"Train samples   : {len(train_df)}")
-print(f"Test samples    : {len(test_df)}")
-print(f"Output folder   : {OUTPUT_PATH}")
-print("================================================")
+if __name__ == "__main__":
+    print(f"Processed files : {len(features_df)}")
+    print(f"Corrupt files   : {len(corrupt_files)}")
+    print(f"Features/file   : {TOTAL_FEATURES}")
+    print(f"Train samples   : {len(train_df)}")
+    print(f"Test samples    : {len(test_df)}")
+    print(f"Output folder   : {OUTPUT_PATH}")
+    print("================================================")
