@@ -1,0 +1,11 @@
+2026-09-27 10:42:18,812 | INFO | Model loaded successfully from C:/Users/Hadel/OneDrive/Desktop/ML_Project/-ML-Final-Lab-Group-02/models/final_svm_model.pkl
+2026-09-27 10:42:23,080 | INFO | Audio inference completed | file=C:/Users/Hadel/Downloads/RAVDESS/Audio_Speech_Actors_01-24_16k/Actor_08/03-01-03-01-01-01-08.wav | prediction=happy | latency_ms=92.74
+2026-09-27 10:42:23,081 | ERROR | Audio file not found: C:/this_file_does_not_exist.wav
+2026-09-27 11:33:32,316 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-27 11:33:35,979 | INFO | Audio inference completed | file=C:/Users/Hadel/Downloads/RAVDESS/Audio_Speech_Actors_01-24_16k/Actor_08/03-01-03-01-01-01-08.wav | prediction=happy | latency_ms=124.77
+2026-09-27 11:33:35,980 | ERROR | Audio file not found: C:/this_file_does_not_exist.wav
+2026-09-27 11:34:10,483 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-27 11:34:10,708 | INFO | Batch inference completed | samples=288 | total_latency_ms=155.20 | average_latency_ms=0.54
+2026-09-27 11:34:10,744 | INFO | Batch prediction results saved to C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\outputs\ML_Engineering\prediction_results.csv
+2026-09-27 11:36:06,705 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-27 11:36:07,733 | INFO | Audio inference completed | file=C:\Users\Hadel\Downloads\RAVDESS\Audio_Speech_Actors_01-24_16k\Actor_12\03-01-07-02-01-02-12.wav | prediction=surprised | latency_ms=48.09
