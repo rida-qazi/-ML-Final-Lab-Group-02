@@ -1,0 +1,41 @@
+
+DATA QUALITY SUMMARY
+====================
+
+Dataset shape:
+Rows: 1440
+Columns: 183
+Audio features: 180
+
+Missing values:
+0
+
+Duplicate rows:
+0
+
+Duplicate file paths:
+0
+
+Actors:
+24
+
+Minimum recordings per actor:
+60
+
+Maximum recordings per actor:
+60
+
+Classes:
+8
+
+Largest class:
+angry (192)
+
+Smallest class:
+neutral (96)
+
+Class imbalance ratio:
+2.00:1
+
+Features with statistical outliers:
+177 / 180

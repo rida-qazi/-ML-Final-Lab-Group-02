@@ -1,0 +1,17 @@
+INTERPRETATION
+==============
+
+1. EMOTION-SPECIFIC PATTERNS
+mfcc_0 shows the largest difference in mean value across the analysed emotion classes.
+
+2. REDUNDANT FEATURES
+The strongest correlation was between mel_109 and mel_110 (0.965).
+
+3. CLASS DISTRIBUTION IMPACT
+The smallest class was neutral with 96 recordings, while the largest class was calm with 192 recordings.
+
+TOP 3 ACTIONABLE INSIGHTS
+--------------------------
+1. mfcc_0 shows notable variation across emotion classes.
+2. mel_109 and mel_110 show the strongest feature correlation.
+3. The class distribution should be considered when evaluating model performance.
