@@ -356,19 +356,21 @@ if __name__ == "__main__":
         description="Emotion recognition inference pipeline"
     )
 
-    parser.add_argument(
+    mode = parser.add_mutually_exclusive_group(required=True)
+
+    mode.add_argument(
         "--batch",
         action="store_true",
         help="Run inference on the test feature dataset"
     )
 
-    parser.add_argument(
+    mode.add_argument(
         "--audio",
         type=str,
         help="Run inference on a single audio file"
     )
 
-    parser.add_argument(
+    mode.add_argument(
         "--sanity-check",
         action="store_true",
         help="Run pipeline sanity checks"
