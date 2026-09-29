@@ -27,7 +27,7 @@ N_MEL = 128
 TOTAL_FEATURES = N_MFCC + N_CHROMA + N_MEL
 
 # Change these paths for your computer
-DATA_PATH = r"C:\Users\kamal\Downloads\ml\data\Audio_Speech_Actors_01-24_16k"
+DATA_PATH = r"/Users/macbook/Documents/Audio_Speech_Actors_01-24_16k"
 OUTPUT_PATH = r"data/processed"
 
 os.makedirs(OUTPUT_PATH, exist_ok=True)

@@ -11,10 +11,10 @@ results = []
 
 warnings.filterwarnings("ignore")
 
-# Processed feature dataset
-FEATURES_PATH = r"C:/Users/Hadel/OneDrive/Desktop/ML_Project/-ML-Final-Lab-Group-02/data/processed/features.csv"
+# This is the processed feature file that already contains the extracted audio features.
+FEATURES_PATH = r"/Users/macbook/Desktop/ml last/-ML-Final-Lab-Group-02/data/processed/features.csv"
 
-# Load features
+# Load the feature dataset so we can prepare it for model training.
 df = pd.read_csv(FEATURES_PATH)
 
 print("Dataset shape:", df.shape)
@@ -24,7 +24,7 @@ print(df["emotion"].value_counts())
 
 from sklearn.model_selection import train_test_split
 
-# Features: exclude metadata and target
+# Keep only the actual audio features here. File path, actor ID, and emotion are metadata/target columns.
 feature_columns = [
     col for col in df.columns
     if col not in ["file_path", "actor_id", "emotion"]
@@ -33,7 +33,7 @@ feature_columns = [
 X = df[feature_columns]
 y = df["emotion"]
 
-# 80% training, 20% testing
+# Split the data into training and testing sets while keeping the emotion classes balanced.
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
@@ -51,7 +51,7 @@ print(y_train.value_counts())
 print("\nTest class distribution:")
 print(y_test.value_counts())
 
-# # SVM
+# Start by training an SVM model as one of the baseline classifiers.
 
 from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
@@ -59,7 +59,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedKFold, cross_validate
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-# SVM pipeline
+# Scaling is important for SVM because the features can have very different ranges.
 svm_pipeline = Pipeline([
     ("scaler", StandardScaler()),
     ("model", SVC(
@@ -71,7 +71,7 @@ svm_pipeline = Pipeline([
     ))
 ])
 
-# 5-fold cross-validation
+# Use five folds to check how consistently the SVM performs on different parts of the training data.
 cv = StratifiedKFold(
     n_splits=5,
     shuffle=True,
@@ -95,21 +95,21 @@ svm_cv = cross_validate(
     n_jobs=-1
 )
 
-# CV results
+# Average the validation scores from all five folds so we get a more stable estimate of performance.
 cv_train_acc = svm_cv["train_accuracy"].mean()
 cv_accuracy = svm_cv["test_accuracy"].mean()
 cv_precision = svm_cv["test_precision"].mean()
 cv_recall = svm_cv["test_recall"].mean()
 cv_f1 = svm_cv["test_f1"].mean()
 
-# Fit final SVM on complete training set
+# Run the grid search on the training data. the final SVM using all available training samples.
 svm_pipeline.fit(X_train, y_train)
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_pred = svm_pipeline.predict(X_train)
 y_test_pred = svm_pipeline.predict(X_test)
 
-# Final metrics
+# Calculate the main metrics we will use to evaluate the model.
 train_accuracy = accuracy_score(y_train, y_train_pred)
 test_accuracy = accuracy_score(y_test, y_test_pred)
 test_precision = precision_score(
@@ -136,7 +136,7 @@ print(f"Test Macro Recall:    {test_recall:.4f}")
 
 print(f"\nTrain-Test Gap:      {(train_accuracy-test_accuracy)*100:.2f}%")
 
-# Store results
+# Save the SVM results so they can be compared with the other models later.
 results.append({
     "Model": "SVM (RBF)",
     "Training Accuracy": train_accuracy,
@@ -153,16 +153,16 @@ print("\nResults stored successfully.")
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
-# Predictions on the test set
+# Generate the final predictions on both training and test data. on the test set
 y_test_pred = svm_pipeline.predict(X_test)
 
-# Confusion matrix
+# The confusion matrix shows which emotions are being predicted correctly and which are getting mixed up.
 cm = confusion_matrix(y_test, y_test_pred)
 
-# Class names in consistent order
+# Keep the emotion labels in a fixed order so the matrix is easy to read.
 classes = sorted(y_test.unique())
 
-# Plot
+# Display the confusion matrix as a heatmap.
 fig, ax = plt.subplots(figsize=(9, 7))
 
 disp = ConfusionMatrixDisplay(
@@ -183,7 +183,7 @@ plt.ylabel("Actual Emotion")
 plt.tight_layout()
 plt.show()
 
-# # Logistic Regression
+# Now train Logistic Regression and evaluate it using the same setup.
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
@@ -191,7 +191,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedKFold, cross_validate
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-# Logistic Regression pipeline
+# Standardize the features first, then train Logistic Regression.
 logistic_pipeline = Pipeline([
     ("scaler", StandardScaler()),
     ("model", LogisticRegression(
@@ -200,7 +200,7 @@ logistic_pipeline = Pipeline([
     ))
 ])
 
-# 5-fold cross-validation
+# Use five folds to check how consistently the SVM performs on different parts of the training data.
 cv = StratifiedKFold(
     n_splits=5,
     shuffle=True,
@@ -224,21 +224,21 @@ logistic_cv = cross_validate(
     n_jobs=-1
 )
 
-# CV results
+# Average the validation scores from all five folds so we get a more stable estimate of performance.
 cv_train_acc = logistic_cv["train_accuracy"].mean()
 cv_accuracy = logistic_cv["test_accuracy"].mean()
 cv_precision = logistic_cv["test_precision"].mean()
 cv_recall = logistic_cv["test_recall"].mean()
 cv_f1 = logistic_cv["test_f1"].mean()
 
-# Fit final Logistic Regression on complete training set
+# Run the grid search on the training data. Logistic Regression on the complete training portion.
 logistic_pipeline.fit(X_train, y_train)
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_pred = logistic_pipeline.predict(X_train)
 y_test_pred = logistic_pipeline.predict(X_test)
 
-# Final metrics
+# Calculate the main metrics we will use to evaluate the model.
 train_accuracy = accuracy_score(y_train, y_train_pred)
 test_accuracy = accuracy_score(y_test, y_test_pred)
 
@@ -288,7 +288,7 @@ print(
     f"{(train_accuracy-test_accuracy)*100:.2f}%"
 )
 
-# Store Logistic Regression results
+# Keep the Logistic Regression metrics for the final model comparison.
 logistic_result = {
     "Model": "Logistic Regression",
     "Training Accuracy": train_accuracy,
@@ -310,20 +310,20 @@ from sklearn.metrics import (
     classification_report
 )
 
-# Predictions on the test set
+# Generate the final predictions on both training and test data. on the test set
 y_test_pred = logistic_pipeline.predict(X_test)
 
-# Class names in consistent order
+# Keep the emotion labels in a fixed order so the matrix is easy to read.
 classes = sorted(y_test.unique())
 
-# Confusion matrix
+# The confusion matrix shows which emotions are being predicted correctly and which are getting mixed up.
 cm = confusion_matrix(
     y_test,
     y_test_pred,
     labels=classes
 )
 
-# Plot
+# Display the confusion matrix as a heatmap.
 fig, ax = plt.subplots(figsize=(9, 7))
 
 disp = ConfusionMatrixDisplay(
@@ -345,7 +345,7 @@ plt.tight_layout()
 plt.show()
 
 
-# Classification report
+# Show precision, recall and F1-score separately for each emotion.
 print("\nLogistic Regression Classification Report:")
 print(
     classification_report(
@@ -356,13 +356,13 @@ print(
     )
 )
 
-# # Random Forest
+# Run the grid search on the training data. a Random Forest model to compare a tree-based approach with the previous models.
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold, cross_validate
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
-# Random Forest
+# Set up the Random Forest with the selected hyperparameters.
 rf = RandomForestClassifier(
     n_estimators=500,
     max_depth=10,
@@ -373,7 +373,7 @@ rf = RandomForestClassifier(
     n_jobs=-1
 )
 
-# 5-fold cross-validation
+# Use five folds to check how consistently the SVM performs on different parts of the training data.
 cv = StratifiedKFold(
     n_splits=5,
     shuffle=True,
@@ -397,21 +397,21 @@ rf_cv = cross_validate(
     n_jobs=-1
 )
 
-# CV results
+# Average the validation scores from all five folds so we get a more stable estimate of performance.
 cv_train_acc = rf_cv["train_accuracy"].mean()
 cv_accuracy = rf_cv["test_accuracy"].mean()
 cv_precision = rf_cv["test_precision"].mean()
 cv_recall = rf_cv["test_recall"].mean()
 cv_f1 = rf_cv["test_f1"].mean()
 
-# Fit final Random Forest on complete training set
+# Run the grid search on the training data. the final Random Forest using the full training data.
 rf.fit(X_train, y_train)
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_pred = rf.predict(X_train)
 y_test_pred = rf.predict(X_test)
 
-# Final metrics
+# Calculate the main metrics we will use to evaluate the model.
 train_accuracy = accuracy_score(y_train, y_train_pred)
 test_accuracy = accuracy_score(y_test, y_test_pred)
 
@@ -433,7 +433,7 @@ test_f1 = f1_score(
     average="macro"
 )
 
-# Store results
+# Save the SVM results so they can be compared with the other models later.
 results.append({
     "Model": "Random Forest",
     "Training Accuracy": train_accuracy,
@@ -446,7 +446,7 @@ results.append({
     "Train-Test Gap": train_accuracy - test_accuracy
 })
 
-# Display results
+# Print the Random Forest performance so we can compare it with the other models.
 print("Random Forest")
 print("=" * 50)
 
@@ -480,20 +480,20 @@ print("\nResults stored successfully.")
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_test_pred = rf.predict(X_test)
 
-# Class order
+# Use the same emotion order when displaying the confusion matrix.
 classes = sorted(y_test.unique())
 
-# Confusion matrix
+# The confusion matrix shows which emotions are being predicted correctly and which are getting mixed up.
 cm = confusion_matrix(
     y_test,
     y_test_pred,
     labels=classes
 )
 
-# Plot
+# Display the confusion matrix as a heatmap.
 fig, ax = plt.subplots(figsize=(9, 7))
 
 disp = ConfusionMatrixDisplay(
@@ -514,7 +514,7 @@ plt.ylabel("Actual Emotion")
 plt.tight_layout()
 plt.show()
 
-# # XG Classifier
+# Run the grid search on the training data. XGBoost as another model for multiclass emotion classification.
 
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
@@ -526,7 +526,7 @@ from sklearn.metrics import (
     f1_score
 )
 
-# Encode emotion labels for XGBoost
+# XGBoost needs the emotion labels in numeric form, so encode them first.
 encoder = LabelEncoder()
 
 y_train_xgb = encoder.fit_transform(y_train)
@@ -536,7 +536,7 @@ print("Classes:")
 for i, label in enumerate(encoder.classes_):
     print(i, "=", label)
 
-# XGBoost model
+# Set up the XGBoost classifier with the chosen model settings.
 xgb_model = XGBClassifier(
     n_estimators=500,
     max_depth=4,
@@ -550,7 +550,7 @@ xgb_model = XGBClassifier(
     n_jobs=-1
 )
 
-# 5-fold cross-validation
+# Use five folds to check how consistently the SVM performs on different parts of the training data.
 cv = StratifiedKFold(
     n_splits=5,
     shuffle=True,
@@ -574,21 +574,21 @@ xgb_cv = cross_validate(
     n_jobs=-1
 )
 
-# CV results
+# Average the validation scores from all five folds so we get a more stable estimate of performance.
 cv_train_acc = xgb_cv["train_accuracy"].mean()
 cv_accuracy = xgb_cv["test_accuracy"].mean()
 cv_precision = xgb_cv["test_precision"].mean()
 cv_recall = xgb_cv["test_recall"].mean()
 cv_f1 = xgb_cv["test_f1"].mean()
 
-# Fit final XGBoost on complete training set
+# Run the grid search on the training data. XGBoost on all of the training samples.
 xgb_model.fit(X_train, y_train_xgb)
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_pred_xgb = xgb_model.predict(X_train)
 y_test_pred_xgb = xgb_model.predict(X_test)
 
-# Final metrics
+# Calculate the main metrics we will use to evaluate the model.
 train_accuracy = accuracy_score(
     y_train_xgb,
     y_train_pred_xgb
@@ -617,7 +617,7 @@ test_f1 = f1_score(
     average="macro"
 )
 
-# Store results
+# Save the SVM results so they can be compared with the other models later.
 results.append({
     "Model": "XGBoost",
     "Training Accuracy": train_accuracy,
@@ -631,7 +631,7 @@ results.append({
 })
 print("\nResults stored successfully.")
 
-# Display results
+# Print the Random Forest performance so we can compare it with the other models.
 print("\nXGBoost")
 print("=" * 50)
 
@@ -667,20 +667,20 @@ from sklearn.metrics import (
     classification_report
 )
 
-# XGBoost test predictions are encoded integers
+# The predictions are numeric, so we use the encoded class labels when plotting the results.
 y_test_pred_xgb = xgb_model.predict(X_test)
 
-# Class order
+# Use the same emotion order when displaying the confusion matrix.
 classes_xgb = encoder.classes_
 
-# Confusion matrix
+# The confusion matrix shows which emotions are being predicted correctly and which are getting mixed up.
 cm_xgb = confusion_matrix(
     y_test_xgb,
     y_test_pred_xgb,
     labels=range(len(classes_xgb))
 )
 
-# Plot
+# Display the confusion matrix as a heatmap.
 fig, ax = plt.subplots(figsize=(9, 7))
 
 disp = ConfusionMatrixDisplay(
@@ -701,7 +701,7 @@ plt.ylabel("Actual Emotion")
 plt.tight_layout()
 plt.show()
 
-# Classification report
+# Show precision, recall and F1-score separately for each emotion.
 print("\nXGBoost Classification Report:")
 print(
     classification_report(
@@ -712,7 +712,7 @@ print(
     )
 )
 
-# # MLP Classifier
+# Run the grid search on the training data. a small neural network model to see how it performs against the traditional classifiers.
 
 from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
@@ -725,7 +725,7 @@ from sklearn.metrics import (
     f1_score
 )
 
-# MLP pipeline
+# Scale the features before passing them into the neural network.
 mlp_pipeline = Pipeline([
     ("scaler", StandardScaler()),
     ("model", MLPClassifier(
@@ -741,7 +741,7 @@ mlp_pipeline = Pipeline([
     ))
 ])
 
-# 5-fold cross-validation
+# Use five folds to check how consistently the SVM performs on different parts of the training data.
 cv = StratifiedKFold(
     n_splits=5,
     shuffle=True,
@@ -765,21 +765,21 @@ mlp_cv = cross_validate(
     n_jobs=-1
 )
 
-# CV results
+# Average the validation scores from all five folds so we get a more stable estimate of performance.
 cv_train_acc = mlp_cv["train_accuracy"].mean()
 cv_accuracy = mlp_cv["test_accuracy"].mean()
 cv_precision = mlp_cv["test_precision"].mean()
 cv_recall = mlp_cv["test_recall"].mean()
 cv_f1 = mlp_cv["test_f1"].mean()
 
-# Fit final MLP on complete training set
+# Run the grid search on the training data. the final MLP using the complete training set.
 mlp_pipeline.fit(X_train, y_train)
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_pred = mlp_pipeline.predict(X_train)
 y_test_pred = mlp_pipeline.predict(X_test)
 
-# Final metrics
+# Calculate the main metrics we will use to evaluate the model.
 train_accuracy = accuracy_score(y_train, y_train_pred)
 test_accuracy = accuracy_score(y_test, y_test_pred)
 
@@ -801,7 +801,7 @@ test_f1 = f1_score(
     average="macro"
 )
 
-# Store results
+# Save the SVM results so they can be compared with the other models later.
 results.append({
     "Model": "MLP",
     "Training Accuracy": train_accuracy,
@@ -814,7 +814,7 @@ results.append({
     "Train-Test Gap": train_accuracy - test_accuracy
 })
 
-# Display results
+# Print the Random Forest performance so we can compare it with the other models.
 print("MLP Neural Network")
 print("=" * 50)
 
@@ -850,20 +850,20 @@ from sklearn.metrics import (
     classification_report
 )
 
-# MLP test predictions
+# Get the MLP predictions for the unseen test data.
 y_test_pred_mlp = mlp_pipeline.predict(X_test)
 
-# Class order
+# Use the same emotion order when displaying the confusion matrix.
 classes_mlp = sorted(y_test.unique())
 
-# Confusion matrix
+# The confusion matrix shows which emotions are being predicted correctly and which are getting mixed up.
 cm_mlp = confusion_matrix(
     y_test,
     y_test_pred_mlp,
     labels=classes_mlp
 )
 
-# Plot
+# Display the confusion matrix as a heatmap.
 fig, ax = plt.subplots(figsize=(9, 7))
 
 disp = ConfusionMatrixDisplay(
@@ -884,7 +884,7 @@ plt.ylabel("Actual Emotion")
 plt.tight_layout()
 plt.show()
 
-# Classification report
+# Show precision, recall and F1-score separately for each emotion.
 print("\nMLP Classification Report:")
 print(
     classification_report(
@@ -895,13 +895,13 @@ print(
     )
 )
 
-# # Final Analysis
+# Bring all model results together so their performance can be compared in one table.
 
 import pandas as pd
 
 comparison_df = pd.DataFrame(results)
 
-# Convert metrics to percentages for easier reading
+# Convert decimal scores into percentages to make the comparison easier to understand.
 display_df = comparison_df.copy()
 
 metric_columns = [
@@ -924,17 +924,16 @@ print("FINAL MODEL COMPARISON")
 print("=" * 100)
 print(display_df.to_string(index=False))
 
-# # Fine Tuning
+# After comparing the initial models, tune the strongest candidates to search for better parameters.
 
-# ## Fine Tuning SVM Parameters
+# Search through different SVM settings to find a better combination.
 
 from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 
-# --------------------------------------------------
-# SVM PIPELINE
+# Use the same scaling and SVM structure while testing different parameter combinations.
 # --------------------------------------------------
 
 svm_pipeline = Pipeline([
@@ -942,8 +941,7 @@ svm_pipeline = Pipeline([
     ("model", SVC(probability=True))
 ])
 
-# --------------------------------------------------
-# PARAMETER GRID
+# Define the XGBoost values that will be tested during grid search.
 # --------------------------------------------------
 
 param_grid = {
@@ -952,8 +950,7 @@ param_grid = {
     "model__kernel": ["rbf"]
 }
 
-# --------------------------------------------------
-# 5-FOLD STRATIFIED CV
+# Use the same five-fold stratified validation approach for a fair comparison.
 # --------------------------------------------------
 
 cv = StratifiedKFold(
@@ -962,8 +959,7 @@ cv = StratifiedKFold(
     random_state=42
 )
 
-# --------------------------------------------------
-# GRID SEARCH
+# Test the selected XGBoost combinations and choose the one with the best macro F1.
 # --------------------------------------------------
 
 grid = GridSearchCV(
@@ -976,11 +972,10 @@ grid = GridSearchCV(
     n_jobs=-1
 )
 
-# Train
+# Run the grid search on the training data.
 grid.fit(X_train, y_train)
 
-# --------------------------------------------------
-# BEST PARAMETERS
+# Show the SVM settings that gave the best cross-validation score.
 # --------------------------------------------------
 
 print("\nBEST PARAMETERS:")
@@ -990,7 +985,7 @@ print("\nBEST CV MACRO F1:")
 print(f"{grid.best_score_:.4f}")
 print(f"{grid.best_score_ * 100:.2f}%")
 
-# ## Tuned SVM Model
+# Evaluate the tuned SVM on both the training and test sets.
 
 from sklearn.metrics import (
     accuracy_score,
@@ -1000,14 +995,14 @@ from sklearn.metrics import (
     classification_report
 )
 
-# Best tuned SVM
+# Use the best SVM found by the grid search.
 best_svm = grid.best_estimator_
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_pred_tuned = best_svm.predict(X_train)
 y_test_pred_tuned = best_svm.predict(X_test)
 
-# Metrics
+# Calculate the final metrics for the tuned XGBoost model.
 train_accuracy_tuned = accuracy_score(
     y_train, y_train_pred_tuned
 )
@@ -1038,8 +1033,7 @@ train_test_gap_tuned = (
     train_accuracy_tuned - test_accuracy_tuned
 )
 
-# --------------------------------------------------
-# RESULTS
+# Print the tuned XGBoost performance for comparison with the tuned SVM.
 # --------------------------------------------------
 
 print("TUNED SVM RESULTS")
@@ -1088,8 +1082,7 @@ print(
     f"{train_test_gap_tuned*100:.2f}%"
 )
 
-# --------------------------------------------------
-# CLASSIFICATION REPORT
+# Check the detailed performance for each emotion class.
 # --------------------------------------------------
 
 print("\nCLASSIFICATION REPORT")
@@ -1102,14 +1095,13 @@ print(
     )
 )
 
-# # Tuning XGB Classifier
+# Tune XGBoost parameters to see if its performance can be improved.
 
 from xgboost import XGBClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 
-# --------------------------------------------------
-# ENCODE TARGET
+# Convert the emotion names into numbers because XGBoost works with encoded class labels.
 # --------------------------------------------------
 
 encoder = LabelEncoder()
@@ -1117,8 +1109,7 @@ encoder = LabelEncoder()
 y_train_xgb = encoder.fit_transform(y_train)
 y_test_xgb = encoder.transform(y_test)
 
-# --------------------------------------------------
-# XGBOOST MODEL
+# Set up the base XGBoost model before testing different parameter combinations.
 # --------------------------------------------------
 
 xgb_model = XGBClassifier(
@@ -1129,8 +1120,7 @@ xgb_model = XGBClassifier(
     n_jobs=-1
 )
 
-# --------------------------------------------------
-# PARAMETER GRID
+# Define the XGBoost values that will be tested during grid search.
 # --------------------------------------------------
 
 xgb_param_grid = {
@@ -1141,8 +1131,7 @@ xgb_param_grid = {
     "colsample_bytree": [0.8]
 }
 
-# --------------------------------------------------
-# 5-FOLD STRATIFIED CV
+# Use the same five-fold stratified validation approach for a fair comparison.
 # --------------------------------------------------
 
 cv = StratifiedKFold(
@@ -1151,8 +1140,7 @@ cv = StratifiedKFold(
     random_state=42
 )
 
-# --------------------------------------------------
-# GRID SEARCH
+# Test the selected XGBoost combinations and choose the one with the best macro F1.
 # --------------------------------------------------
 
 xgb_grid = GridSearchCV(
@@ -1195,14 +1183,14 @@ from sklearn.metrics import (
     classification_report
 )
 
-# Best tuned model
+# Keep the best XGBoost model found during tuning.
 best_xgb = xgb_grid.best_estimator_
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_pred_xgb = best_xgb.predict(X_train)
 y_test_pred_xgb = best_xgb.predict(X_test)
 
-# Metrics
+# Calculate the final metrics for the tuned XGBoost model.
 train_accuracy_xgb = accuracy_score(
     y_train_xgb,
     y_train_pred_xgb
@@ -1235,8 +1223,7 @@ train_test_gap_xgb = (
     train_accuracy_xgb - test_accuracy_xgb
 )
 
-# --------------------------------------------------
-# RESULTS
+# Print the tuned XGBoost performance for comparison with the tuned SVM.
 # --------------------------------------------------
 
 print("TUNED XGBOOST RESULTS")
@@ -1291,7 +1278,7 @@ print(
     )
 )
 
-# # FINAL MODEL = TUNED SVM
+# The tuned SVM is used as the final model for the project.
 
 from sklearn.metrics import (
     accuracy_score,
@@ -1304,18 +1291,16 @@ from sklearn.metrics import (
 )
 import matplotlib.pyplot as plt
 
-# ==========================================================
-# FINAL MODEL = TUNED SVM
+# Use the best SVM returned by the grid search as the final model.
 # ==========================================================
 
 final_model = grid.best_estimator_
 
-# Predictions
+# Generate the final predictions on both training and test data.
 y_train_final = final_model.predict(X_train)
 y_test_final = final_model.predict(X_test)
 
-# ----------------------------------------------------------
-# METRICS
+# Calculate the final model's accuracy, precision, recall and F1-score.
 # ----------------------------------------------------------
 
 train_accuracy = accuracy_score(
@@ -1348,8 +1333,7 @@ test_f1 = f1_score(
 
 train_test_gap = train_accuracy - test_accuracy
 
-# ----------------------------------------------------------
-# RESULTS
+# Print the final model performance and the parameters selected during tuning.
 # ----------------------------------------------------------
 
 print("FINAL MODEL: TUNED SVM")
@@ -1366,8 +1350,7 @@ print(f"Test Macro Precision: {test_precision*100:.2f}%")
 print(f"Test Macro Recall:    {test_recall*100:.2f}%")
 print(f"Train-Test Gap:       {train_test_gap*100:.2f}%")
 
-# ----------------------------------------------------------
-# CLASSIFICATION REPORT
+# Show detailed performance for each emotion in the final model.
 # ----------------------------------------------------------
 
 print("\nCLASSIFICATION REPORT")
@@ -1380,8 +1363,7 @@ print(
     )
 )
 
-# ----------------------------------------------------------
-# CONFUSION MATRIX
+# Visualize which emotions the final model gets right and which ones it confuses.
 # ----------------------------------------------------------
 
 classes = sorted(y_test.unique())
@@ -1412,15 +1394,16 @@ plt.ylabel("Actual Emotion")
 plt.tight_layout()
 plt.show()
 
-# # Save Model
+# Save the trained final model so it can be reused later without retraining.
 
-# ----------------------------------------------------------
-# SAVE FINAL SVM MODEL
+# Save the final tuned SVM to the project's models folder.
 # ----------------------------------------------------------
 
 import joblib
+import os
 
-MODEL_PATH = r"C:/Users/Hadel/OneDrive/Desktop/ML_Project/-ML-Final-Lab-Group-02/models/final_svm_model.pkl"
+MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models", "final_svm_model.pkl")
+
 
 joblib.dump(
     final_model,
@@ -1430,10 +1413,9 @@ joblib.dump(
 print("Final SVM model saved successfully.")
 print("Path:", MODEL_PATH)
 
-# # Verify Model 
+# Reload the saved model and make sure it produces the same predictions. 
 
-# ----------------------------------------------------------
-# VERIFY SAVED MODEL
+# Load the saved model and compare its predictions with the original final predictions.
 # ----------------------------------------------------------
 
 loaded_model = joblib.load(MODEL_PATH)
@@ -1442,6 +1424,6 @@ test_predictions = loaded_model.predict(X_test)
 
 print("Model loaded successfully.")
 print("Predictions match:",
-      (test_predictions == y_test_final).all())
+      (test_predictions == y_test_final).all()) 
 
 
