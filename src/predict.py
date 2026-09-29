@@ -222,7 +222,7 @@ def run_single_audio(audio_path):
 
 #Sanity checks~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-def run_sanity_checks():
+def run_sanity_checks(audio_path):
     """
     Run basic checks to verify that the inference pipeline
     is functioning correctly.
@@ -267,11 +267,7 @@ def run_sanity_checks():
     # 3. Test raw audio inference
     # --------------------------------------------------
 
-    audio_path = (
-        r"C:/Users/Hadel/Downloads/RAVDESS/"
-        r"Audio_Speech_Actors_01-24_16k/Actor_08/"
-        r"03-01-03-01-01-01-08.wav"
-    )
+
 
     result = predict_audio(audio_path)
 
@@ -330,7 +326,7 @@ def run_sanity_checks():
     # 8. Check invalid audio handling
     # --------------------------------------------------
 
-    invalid_path = r"C:/this_file_does_not_exist.wav"
+    invalid_path = Path("definitely_nonexistent_file_also_i_like_ducks.wav")
 
     try:
         predict_audio(invalid_path)
@@ -376,6 +372,12 @@ if __name__ == "__main__":
         help="Run pipeline sanity checks"
     )
 
+    parser.add_argument(
+        "--sanity-audio",
+        type=str,
+        help="Audio file used for the sanity check"
+    )
+
     args = parser.parse_args()
 
     if args.batch:
@@ -385,7 +387,10 @@ if __name__ == "__main__":
         run_single_audio(args.audio)
 
     elif args.sanity_check:
-        run_sanity_checks()
 
-    else:
-        parser.print_help()
+        if not args.sanity_audio:
+            parser.error(
+                "--sanity-check requires --sanity-audio"
+            )
+
+        run_sanity_checks(args.sanity_audio)
