@@ -7,7 +7,7 @@ import os
 import logging
 from pathlib import Path
 import argparse
-from preprocessing import extract_features, validate_features
+from src.preprocessing import extract_features, validate_features
 
 #Paths section~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 PROJECT_ROOT = Path(__file__).resolve().parent.parent

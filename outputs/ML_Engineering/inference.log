@@ -9,3 +9,49 @@
 2026-09-27 11:34:10,744 | INFO | Batch prediction results saved to C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\outputs\ML_Engineering\prediction_results.csv
 2026-09-27 11:36:06,705 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
 2026-09-27 11:36:07,733 | INFO | Audio inference completed | file=C:\Users\Hadel\Downloads\RAVDESS\Audio_Speech_Actors_01-24_16k\Actor_12\03-01-07-02-01-02-12.wav | prediction=surprised | latency_ms=48.09
+2026-09-29 19:13:24,866 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 19:14:03,709 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpzg24bdbj.wav | prediction=fearful | latency_ms=177.94
+2026-09-29 19:15:26,002 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp59tz2d1l.wav | prediction=fearful | latency_ms=13.97
+2026-09-29 19:15:42,705 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpzeyvxis3.wav | prediction=angry | latency_ms=13.46
+2026-09-29 19:31:50,701 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 19:33:30,619 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpgdmp0w6o.wav | prediction=angry | latency_ms=445.32
+2026-09-29 19:34:52,448 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp51iebvvk.wav | prediction=angry | latency_ms=98.71
+2026-09-29 19:35:50,499 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpj4yg6e8_.wav | prediction=angry | latency_ms=13.08
+2026-09-29 19:36:17,626 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpwr4qx_9g.wav | prediction=angry | latency_ms=16.96
+2026-09-29 19:37:33,467 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpme2nrwym.wav | prediction=angry | latency_ms=16.48
+2026-09-29 19:37:53,177 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp409vbqh6.wav | prediction=angry | latency_ms=17.05
+2026-09-29 19:38:09,022 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp76jdqitr.wav | prediction=angry | latency_ms=18.00
+2026-09-29 19:39:29,332 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpj1wem3hg.wav | prediction=angry | latency_ms=37.51
+2026-09-29 19:40:07,692 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp_4p2a8og.wav | prediction=angry | latency_ms=19.16
+2026-09-29 19:43:23,608 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 19:47:07,186 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp2myanuw7.wav | prediction=angry | latency_ms=183.76
+2026-09-29 19:47:12,118 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpupgmqwg_.wav | prediction=angry | latency_ms=18.92
+2026-09-29 19:49:23,537 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 19:52:28,951 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp7z4bsxfe.wav | prediction=angry | latency_ms=267.13
+2026-09-29 19:52:28,963 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp2337e2gy.wav | prediction=angry | latency_ms=292.15
+2026-09-29 19:52:57,572 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmprwoue7v2.wav | prediction=angry | latency_ms=17.41
+2026-09-29 20:23:30,796 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 20:25:53,873 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 20:27:14,556 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpc7eur9nx.wav | prediction=angry | latency_ms=300.35
+2026-09-29 20:27:56,769 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp403zyqjq.wav | prediction=angry | latency_ms=32.24
+2026-09-29 20:29:50,794 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 20:30:07,311 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-29 20:30:38,359 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp5wr2meip.wav | prediction=angry | latency_ms=173.83
+2026-09-30 07:13:04,868 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:13:44,777 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpr7orn1yy.wav | prediction=angry | latency_ms=580.50
+2026-09-30 07:16:14,825 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp46_vy1g9.wav | prediction=angry | latency_ms=25.26
+2026-09-30 07:30:26,241 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:31:09,017 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmplmu9rcoc.wav | prediction=angry | latency_ms=374.33
+2026-09-30 07:32:10,047 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:32:33,154 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpaq84ywzc.wav | prediction=angry | latency_ms=171.21
+2026-09-30 07:33:42,013 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpyzucgbou.wav | prediction=angry | latency_ms=41.65
+2026-09-30 07:36:50,411 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:37:14,360 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp033mcz9m.wav | prediction=angry | latency_ms=23.34
+2026-09-30 07:37:47,031 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpkp03bupj.wav | prediction=angry | latency_ms=30.37
+2026-09-30 07:42:23,660 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:42:23,727 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:42:52,091 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpy74t7fpu.wav | prediction=angry | latency_ms=30.89
+2026-09-30 07:45:36,525 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:45:36,930 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:46:28,604 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp_0cjqolj.wav | prediction=angry | latency_ms=26.26
+2026-09-30 07:47:11,089 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpbkreeyfv.wav | prediction=angry | latency_ms=26.55
