@@ -491,6 +491,25 @@ def add_business_groups(df):
         df["actual_group"] == df["predicted_group"]
     )
 
+    # Type I / Type II error classification
+    df["error_type"] = "Correct"
+
+    # Type I = False Positive
+    # Actually non-negative, predicted as negative
+    df.loc[
+        (df["actual_group"] != "negative") &
+        (df["predicted_group"] == "negative"),
+        "error_type"
+    ] = "Type I(FP)"
+
+    # Type II = False Negative
+    # Actually negative, predicted as non-negative
+    df.loc[
+        (df["actual_group"] == "negative") &
+        (df["predicted_group"] != "negative"),
+        "error_type"
+    ] = "Type II(FN)"
+
     # Display distribution
     print("\nActual business-group distribution:")
 
@@ -505,7 +524,6 @@ def add_business_groups(df):
     print(distribution)
 
     return df
-
 
 # In[55]:
 
