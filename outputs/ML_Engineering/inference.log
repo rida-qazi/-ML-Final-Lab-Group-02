@@ -55,3 +55,14 @@
 2026-09-30 07:45:36,930 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
 2026-09-30 07:46:28,604 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp_0cjqolj.wav | prediction=angry | latency_ms=26.26
 2026-09-30 07:47:11,089 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpbkreeyfv.wav | prediction=angry | latency_ms=26.55
+2026-09-30 07:49:15,635 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:49:15,768 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 07:49:42,533 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpdk6n_h5o.wav | prediction=angry | latency_ms=22.21
+2026-09-30 07:50:14,340 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpqshnq5_u.wav | prediction=angry | latency_ms=26.14
+2026-09-30 07:51:46,205 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpcdgt7n20.wav | prediction=fearful | latency_ms=42.03
+2026-09-30 07:52:02,328 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpp93wtux6.wav | prediction=disgust | latency_ms=21.85
+2026-09-30 07:53:05,779 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpwqxr18e4.wav | prediction=angry | latency_ms=32.89
+2026-09-30 07:53:51,822 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpokqqomcj.wav | prediction=angry | latency_ms=50.90
+2026-09-30 07:57:36,742 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpsk3yzqwd.wav | prediction=angry | latency_ms=34.67
+2026-09-30 07:59:16,693 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpyhdn6xq9.wav | prediction=angry | latency_ms=56.81
+2026-09-30 08:06:46,758 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpf4_ibizl.wav | prediction=angry | latency_ms=36.59
