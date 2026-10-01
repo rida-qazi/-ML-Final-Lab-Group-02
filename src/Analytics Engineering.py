@@ -214,6 +214,10 @@ def unit_cost(actual_emotion, predicted_emotion):
     actual_group = BUSINESS_GROUP[actual_emotion]
     predicted_group = BUSINESS_GROUP[predicted_emotion]
 
+    # Correct prediction = no error
+    if actual_emotion == predicted_emotion:
+        return 0
+
     # Same business group
     if actual_group == predicted_group:
         return UNIT_COST_SAME_GROUP
@@ -487,6 +491,25 @@ def add_business_groups(df):
         df["actual_group"] == df["predicted_group"]
     )
 
+    # Type I / Type II error classification
+    df["error_type"] = "Correct"
+
+    # Type I = False Positive
+    # Actually non-negative, predicted as negative
+    df.loc[
+        (df["actual_group"] != "negative") &
+        (df["predicted_group"] == "negative"),
+        "error_type"
+    ] = "Type I(FP)"
+
+    # Type II = False Negative
+    # Actually negative, predicted as non-negative
+    df.loc[
+        (df["actual_group"] == "negative") &
+        (df["predicted_group"] != "negative"),
+        "error_type"
+    ] = "Type II(FN)"
+
     # Display distribution
     print("\nActual business-group distribution:")
 
@@ -501,7 +524,6 @@ def add_business_groups(df):
     print(distribution)
 
     return df
-
 
 # In[55]:
 
@@ -1080,8 +1102,26 @@ def create_business_kpis(df):
 
 def save_ae_predictions(df):
 
-    #Save the original MLE predictions plus all AE-derived fields. This is the main dataset that can be imported into Power BI.
+    # Keep only the dataset-relative path.
+    # This removes the user's local computer path.
+    df["file_path"] = (
+        df["file_path"]
+        .str.split(
+            "Audio_Speech_Actors_01-24_16k",
+            n=1
+        )
+        .str[-1]
+        .str.lstrip("\\/")
+    )
 
+    # Add the dataset folder name back
+    df["file_path"] = (
+        "Audio_Speech_Actors_01-24_16k\\"
+        + df["file_path"]
+    )
+
+    # Save the original MLE predictions
+    # plus all AE-derived fields.
     output_path = os.path.join(
         OUTPUT_DIR,
         "ae_predictions.csv",
