@@ -68,3 +68,5 @@
 2026-09-30 08:06:46,758 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmpf4_ibizl.wav | prediction=angry | latency_ms=36.59
 2026-09-30 16:29:15,471 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
 2026-09-30 16:30:22,030 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp7u_hctui.wav | prediction=disgust | latency_ms=254.96
+2026-09-30 16:31:29,498 | INFO | Model loaded successfully from C:\Users\Hadel\OneDrive\Desktop\ML_Project\-ML-Final-Lab-Group-02\models\final_svm_model.pkl
+2026-09-30 16:32:05,145 | INFO | Audio inference completed | file=C:\Users\Hadel\AppData\Local\Temp\tmp3g7pjw9s.wav | prediction=disgust | latency_ms=83.71
