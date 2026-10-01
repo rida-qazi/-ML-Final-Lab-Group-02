@@ -124,13 +124,6 @@ if audio_file is not None:
 
             temp_audio_path = temp_file.name
 
-        # Debug feature extraction
-        debug_features = extract_features(temp_audio_path)
-
-        st.write("Feature shape:", debug_features.shape)
-        st.write("Feature mean:", debug_features.mean())
-        st.write("Feature standard deviation:", debug_features.std())
-        st.write("First 10 features:", debug_features[:10])
 
 
         try:
@@ -142,8 +135,6 @@ if audio_file is not None:
             result = predict_audio(
                 temp_audio_path
             )
-            st.write("DEBUG RESULT:")
-            st.write(result)
 
 
             # --------------------------------------

@@ -1,6 +1,6 @@
 Speech Emotion Recognition
 
-## Overview
+Overview
 
 This project implements a machine learning pipeline for Speech Emotion Recognition (SER) using the RAVDESS (Ryerson Audio-Visual Database of Emotional Speech and Song) dataset.
 
